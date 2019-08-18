@@ -78,6 +78,8 @@ class _AuthState extends State<Auth> {
 
   @override
   Widget build(BuildContext context) {
+    final double deviceWidth = MediaQuery.of(context).size.width;
+    final double targetWidth = deviceWidth > 550.0 ? 500.0 : deviceWidth * 0.95; //if device width is greater than 550.0 pixels then 500.0 pixels else 95% of device's width
     return Scaffold(
       appBar: AppBar(
         title: Text('Login'),
@@ -88,7 +90,7 @@ class _AuthState extends State<Auth> {
         child: Center(
           child: SingleChildScrollView(
             child: Container(
-              width: MediaQuery.of(context).size.width*0.8,  //always set the width equal to 80% of the width of device screen
+              width: targetWidth,
               child: Column(
                 children: <Widget>[
                   _buildEmailAddress(),
