@@ -63,13 +63,18 @@ class _ProductCreatePageState extends State<ProductCreatePage> {
       'price': _price,
       'image': 'assets/food.jpg'
     };
-    widget.addProduct(product);   //calling the parent widgets method whose stateclass it's being executed in
+    widget.addProduct(
+        product); //calling the parent widgets method whose stateclass it's being executed in
     Navigator.pushReplacementNamed(context, 'products');
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    final double deviceWidth = MediaQuery.of(context).size.width;
+    final double targetWidth = deviceWidth > 550.0 ? 500 : deviceWidth * 0.95;
+    final double targetPadding = deviceWidth - targetWidth;
+    return Container(   /* List View takes full available width so we set padding to the container */
+      padding: EdgeInsets.symmetric(horizontal: targetPadding/2),
       margin: EdgeInsets.all(10.0),
       child: ListView(
         children: <Widget>[
@@ -82,7 +87,8 @@ class _ProductCreatePageState extends State<ProductCreatePage> {
           RaisedButton(
             child: Text("SAVE"),
             color: Theme.of(context).accentColor,
-            onPressed: _saveData,// pass only the reference so that flutter will execute it when pressed.
+            onPressed:
+                _saveData, // pass only the reference so that flutter will execute it when pressed.
           ),
         ],
       ),
