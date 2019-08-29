@@ -4,6 +4,7 @@ import './pages/productsAdmin.dart';
 import './pages/home.dart';
 import './pages/product.dart';
 import './pages/auth.dart';
+import './pages/settings.dart';
 
 void main() {
   // debugPaintSizeEnabled = true;
@@ -21,6 +22,20 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State<MyApp> {
   List<Map<String, dynamic>> _products = [];
+  Brightness brightness;
+  bool _darkmode;
+  @override
+  void initState() {
+    _darkmode = false;
+    super.initState();
+  }
+
+  void _changeTheme(bool dark) {
+    setState(() {
+      brightness = (dark == true) ? Brightness.dark : Brightness.light;
+      _darkmode = (dark == true) ? true: false;
+    });
+  }
 
   void _addProduct(Map<String, dynamic> product) {
     print("addProduct function called ");
@@ -40,9 +55,17 @@ class MyAppState extends State<MyApp> {
     print("Material app build method");
     return new MaterialApp(
         theme: ThemeData(
-            brightness: Brightness.light,
-            primarySwatch: Colors.deepOrange,
-            accentColor: Colors.deepPurple),
+          brightness: brightness,
+          primarySwatch: Colors.deepOrange,
+          accentColor: Colors.deepPurple,
+          buttonTheme: ButtonThemeData(
+            buttonColor: Colors.deepPurple,
+            textTheme: ButtonTextTheme.primary,
+          ),
+
+          // buttonColor: Colors.deepPurple,
+          // buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.accent),
+        ),
         //home: Auth(),
         routes: {
           '/': (BuildContext context) {
@@ -53,11 +76,15 @@ class MyAppState extends State<MyApp> {
           },
           '/admin': (BuildContext context) {
             return ProductAdmin(_addProduct, _removeProduct);
-          }
+          },
+          '/settings': (BuildContext context) {
+            return Settings(_changeTheme,_darkmode);
+          },
         },
         onGenerateRoute: (RouteSettings settings) {
           List<String> pathElements = settings.name.split('/');
-          if (pathElements[0] != '') {  //before first / there's a empty string
+          if (pathElements[0] != '') {
+            //before first / there's a empty string
             return null;
           }
           if (pathElements[1] == 'product') {

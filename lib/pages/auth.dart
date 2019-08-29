@@ -48,7 +48,7 @@ class _AuthState extends State<Auth> {
       },
     );
   }
-
+  
   Widget _buildSwitchListTile() {
     return SwitchListTile(
       value: _acceptTerms,
@@ -69,8 +69,6 @@ class _AuthState extends State<Auth> {
 
   Widget _buildLoginButton(BuildContext context) {
     return RaisedButton(
-      color: Theme.of(context).primaryColor,
-      textColor: Colors.white,
       child: Text('LOGIN'),
       onPressed: _login,
     );
@@ -79,7 +77,9 @@ class _AuthState extends State<Auth> {
   @override
   Widget build(BuildContext context) {
     final double deviceWidth = MediaQuery.of(context).size.width;
-    final double targetWidth = deviceWidth > 550.0 ? 500.0 : deviceWidth * 0.95; //if device width is greater than 550.0 pixels then 500.0 pixels else 95% of device's width
+    final double targetWidth = deviceWidth > 550.0
+        ? 500.0
+        : deviceWidth * 0.95; //if device width is greater than 550.0 pixels then 500.0 pixels else 95% of device's width
     return Scaffold(
       appBar: AppBar(
         title: Text('Login'),
