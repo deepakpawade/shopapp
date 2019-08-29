@@ -21,6 +21,13 @@ class ProductAdmin extends StatelessWidget {
               Navigator.pushReplacementNamed(context, '/products');
             },
           ),
+           ListTile(
+            leading: Icon(Icons.settings_applications),
+            title: Text("Settings"),
+            onTap: () {
+              Navigator.pushReplacementNamed(context, '/settings');
+            },
+          ),
         ],
       ),
     );

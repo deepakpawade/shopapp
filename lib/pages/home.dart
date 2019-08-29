@@ -19,6 +19,13 @@ class Homepage extends StatelessWidget {
             onTap: () {
               Navigator.pushReplacementNamed(context, '/admin');
             },
+          ),
+          ListTile(
+            leading: Icon(Icons.settings_applications),
+            title: Text("Settings"),
+            onTap: () {
+              Navigator.pushReplacementNamed(context, '/settings');
+            },
           )
         ],
       ),
